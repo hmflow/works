@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class W05 {
-
 	public W05(){
 	} 
 	// 풀스캔
@@ -26,8 +25,7 @@ public class W05 {
 					}else{
 						System.err.println(fEach.toString());
 					}
-				}catch(Exception e) {};
-				
+				}catch(Exception e) {};				
 			});
 		}
 	}
@@ -40,8 +38,7 @@ public class W05 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  
-	}
-	
+	}	
 	
 	public static void main(String[] args) {
 		//new W05().findFileForder("c://");
