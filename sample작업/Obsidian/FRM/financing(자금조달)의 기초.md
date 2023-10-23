@@ -2,5 +2,8 @@
 securitization(증권화)를하여 자금조달을 함
 	1. debt   -> bond (채권)  		
 	2. equity -> stock (주식)
+ 
+bond, stock 에서 derivatives(파생상품) 을 발행할수 있음.
+	1.bond -> credit derivatives    
+	2.stock -> market derivatives
 
-debt, equity 에서 derivatives(파생상품) 을 발행할수 있음
