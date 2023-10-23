@@ -41,7 +41,7 @@ ability	number	result
 첫 번째 사원과 두 번째 사원을 선발하여 공부를 시킨 후, 세 번째 사원과 네 번째 사원을 선발하여 공부를 시킵니다. 그 후 첫 번째 사원과 두 번째 사원을 한번 더 선발해 공부를 시키면, 신입사원들의 능력치는 순서대로 6, 6, 7, 7이 되고, 이때가 능력치의 합이 최소인 26이 됩니다.
  * */
 public class ProgrammerCosPro1_rb {
-	public int solution(int[] ability, int number) {
+    public int solution(int[] ability, int number) {
 
         if(number != 0) {
             Arrays.sort(ability);
