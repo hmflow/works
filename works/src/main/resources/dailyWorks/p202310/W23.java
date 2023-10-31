@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 
 public class W23 {
 	public W23(){
-	} 
-	
+	}
+
 	public void fileSearch(String fileName) {
 		try(Stream<File> fileStram = Arrays.stream(new File(fileName).listFiles())){
 			Map<Boolean, List<File>> fMap = fileStram.collect(Collectors.groupingBy(f->f.isFile()));
@@ -27,7 +27,7 @@ public class W23 {
 			});
 		}
 	}
-	
+
 	public void useClipbard() {
 		Clipboard cp = Toolkit.getDefaultToolkit().getSystemClipboard();
 		try {
@@ -39,7 +39,7 @@ public class W23 {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void callFile() {
 		String filePath = "file/c2022Data.csv";
 		try {
@@ -52,10 +52,10 @@ public class W23 {
 			});
 		}catch(Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
-	public static void main(String[] args) { 
+
+	public static void main(String[] args) {
 		//new W23().fileSearch("c:\\");
 		new W23().callFile();
 	}
