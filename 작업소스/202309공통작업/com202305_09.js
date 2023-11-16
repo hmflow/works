@@ -1,7 +1,9 @@
     
-    /*2023-05~ 2023-09 월 프로젝트 기간중 작업한 소스입니다.
+    /*2023-05~ 2023-09 월 프로젝트 기간중 작업한 소스의 일부를 공유합니다 (코딩, 업무 스타일 공유) 
       보안관련 코드와 주석은 모두 삭제하였습니다.
-     */
+      웹스퀘어 기반의 코드이며 개발도구 환경에 맞춰서 함수형을 사용하지 않았습니다.
+      일부 코드는 사용이 가능합니다.
+    */
     /**
         2023-05-30
         이상근 (YESIAM)    
@@ -79,7 +81,7 @@
              예     : urzObjInfo.getBizInfo("resultDataList01", "FND00Map", mainObj.$w); 
              
          
-         3) 라디오 버튼 항목설정
+         3) 라디오 버튼 항목설정 
          - urzzFunction.fnRdBtnSetter(P1 json {value:label}  
                                   ,P2 object (xf:select1, renderType="radiogroup")
                                   ,P3 boolean OrderBy(true:asc, false:desc)
@@ -243,16 +245,16 @@
 //#######################################################################
     //공통코드 호출 데이터 입니다. [0] invo데이터셋 세팅용 정보 [1] 결과값 호출 데이터셋     
     urzzFunction.cdOptions =[{"id"          : "ComCdMapInVo" 
-                          ,"type"        : "EV_IPCMap"
-                          ,"option"      : {"baseNode":"map"} 
-                          ,"keyInfo"     : [ {"id":"cdDomnEnm"   ,"name" : "cdDomnEnm"   ,"EV_IPCType":"text"}
-                                           , {"id":"cdClsfTypeNo","name" : "cdClsfTypeNo","EV_IPCType":"text"}]}
-                         ,{"id"          : "ComCdListVo" 
-                          ,"type"        : "EV_IPCList" 
-                          ,"option"      : {"baseNode": "list" , "repeatNode": "map" } 
-                          ,"columnInfo"  : [ {"id" : "cdDomnEnm", "name" : "코드그룹","EV_IPCType" :"text"}
-                                           , {"id" : "code"     , "name" : "코드"   ,"EV_IPCType" :"text"}
-                                           , {"id" : "name"     , "name" : "라벨"   ,"EV_IPCType" :"text"}]}
+                             ,"type"        : "EV_IPCMap"
+                             ,"option"      : {"baseNode":"map"} 
+                             ,"keyInfo"     : [ {"id":"cdDomnEnm"   ,"name" : "cdDomnEnm"   ,"EV_IPCType":"text"}
+                                              , {"id":"cdClsfTypeNo","name" : "cdClsfTypeNo","EV_IPCType":"text"}]}
+                            ,{"id"          : "ComCdListVo" 
+                             ,"type"        : "EV_IPCList" 
+                             ,"option"      : {"baseNode": "list" , "repeatNode": "map" } 
+                             ,"columnInfo"  : [ {"id" : "cdDomnEnm", "name" : "코드그룹","EV_IPCType" :"text"}
+                                              , {"id" : "code"     , "name" : "코드"   ,"EV_IPCType" :"text"}
+                                              , {"id" : "name"     , "name" : "라벨"   ,"EV_IPCType" :"text"}]}
                          ];
     urzzFunction.options  = {  "id"         : "codeInfo"
                           , "ref"        : "EV_IPC:json,{\"id\":\"daaaata\",\"key\":\"InVo\"}"
@@ -282,7 +284,7 @@
                boolean 
                or Array : boolean : true ? 오름차순 :내림차순
                             Array : 입력된 순서를 입력합니다.   
-                      string 포커스 디폴트값
+                           string : 포커스 디폴트값
     */
     urzzFunction.fnRdBtnSetter = function(jsonInfo, rdObj, orderby, focusValDflt){ 
         var jsonInfoArr = Array.isArray(orderby) ? orderby : Object.keys(jsonInfo).sort(function(a, b){return (orderby ? a-b:b-a)});
@@ -300,10 +302,10 @@
         이상근 (YESIAM) 
         데이터 컬렉션 생성 함수.   
                ( String  : 데이터셋 아이디
-            , Object : mainObj.$w
-            )
-            return json
-            리턴받은 값을 아래 함수에 실행시켜줍니다
+                , Object : mainObj.$w
+               )
+        return json
+        리턴받은 값을 아래 함수에 실행시켜줍니다
     */
     urzzFunction.fnDataListViewSetter = function(id,taskId,wObject){
         var colInfo = [];
@@ -316,9 +318,9 @@
             colInfo.push({id: key , name : conInfo[key] , EV_IPCType :"text", value :jsonData[key] == undefined ? "" :jsonData[key] });
         });
         wObject.EV_IPC.create({ "id"      : id
-                               , "type"    : "EV_IPCMap"
-                            , "option"  : {"baseNode" :"map"}
-                            , "keyInfo" : colInfo     });
+                              , "type"    : "EV_IPCMap"
+                              , "option"  : {"baseNode" :"map"}
+                              , "keyInfo" : colInfo     });
     }
     
     /**
@@ -334,7 +336,7 @@
         var param1Length = 0;
         var param2Length = 0;
         var showData = [];
-        var lastView = EV_IPCMap["lastInsView"];
+		var lastView = EV_IPCMap["lastInsView"];
         lastView =typeof lastView != 'object'  ? {} : lastView ; 
         Object.keys(EV_IPCMap).forEach(function(eachKey){
          if(typeof EV_IPCMap[eachKey] != "function"){
@@ -381,8 +383,7 @@
             ,string : 작업아이디
             ,json : 한글항목입력)
     */    
-    urzzFunction.fnSetBizDataMerge = function(insJson, pageId, taskId , ckrInfo){
-         
+    urzzFunction.fnSetBizDataMerge = function(insJson, pageId, taskId , ckrInfo){ 
         var lastInsView  =  urzObjInfo.getBizInfo(taskId, "lastInsView");  
         lastInsView = lastInsView== undefined || lastInsView == "" ? {} : lastInsView;
         // 데이터를 세팅합니다.
@@ -437,7 +438,7 @@
         csno = urzzFunction.fnBirthDate(csno);
         var nowDate  = new Date();        
         var csnoDate = new Date( csno.substr(0,4) 
-                               , (csno.substr(4,2)*1)-1
+                               ,(csno.substr(4,2)*1)-1
                                , csno.substr(6,2));
         // 월일을 각각 가져와서 생일이 지났는지 확인합니다. 생일이 안지났을경우 년도-1을 합니다.
         var nowMnthDay  = (nowDate.getMonth()  +""+ nowDate.getDate()) *1 ;
@@ -536,10 +537,10 @@
                   
         예1) 다건을 설정시
             var rdCombos =[{rdObj : riskCdInfo, code : "RISK_CD_INFO", orderby : "desc", selected : "1233" }
-                          ,{rdObj : amlCd,     code : "AML_CD"    , orderby : "asc" , selected : "3312" } ];
+                          ,{rdObj : amlCd,      code : "AML_CD"      , orderby : "asc" , selected : "3312" } ];
             urzzFunction.setRdCodes(rdCombos);
         예2) 단건 설정시
-            var rdCombo ={rdObj : amlCd,     code : "AML_CD"    , orderby : "asc" , selected : "3312" } ; 
+            var rdCombo = {rdObj : amlCd,     code : "AML_CD"    , orderby : "asc" , selected : "3312" } ; 
             urzzFunction.setRdCodes(rdCombo);
     */  
     urzzFunction.setRdCodes = function(objParam, noCode, noUseArr){  
@@ -551,8 +552,7 @@
         var mainObjObj = objects[0].rdObj.getScopeWindow().mainObj
 
         urzObjInfo.showLoading("거래 처리 중 입니다.");
-        new Promise(function(resolve, reject){ 
-            
+        new Promise(function(resolve, reject){  
             // Invo DataSet  urzzFunction.getDatasetInfo 함수를 호출하여 가져옵니다.
             var inVo = urzzFunction.getDatasetInfo(mainObjObj);
              // 조회파라메터를 설정합니다. 공통코드 컬럼명:0을 콤마로 구분합니다.
@@ -690,10 +690,10 @@
         return Math.floor((intVal)* (unserVal))/unserVal
     }
     /**
-         2023-06-21
+        2023-06-21
         이상근 (YESIAM)
         비중별 입력되어진 금액은 소수점 2자리만 사용할수 있도록 하기위해 따로 재정의 하였습니다.
-     */
+    */
     urzzFunction.fnFloorMpVal = function(intVal){
         return urzzFunction.fnFloorFloat(intVal,2);
     } 
@@ -821,10 +821,7 @@
         });
         return resultInf;
         
-    }
-     
-    
-    
+    } 
     
     /*
      * 공통팝업 변수 집합
@@ -1000,19 +997,18 @@
         2023-07-07
         이상근 (YESIAM)
         데이터맵 생성
-     */
+    */
     urzzFunction.creDocFromDtl = function(id , EV_IPCList){
         var colInfo = []; 
         // 컬럼셋팅을 합니다.
         Object.keys(EV_IPCList.getJSON()).forEach(function(key){
             colInfo.push({id: urzzFunction.fnCamelToSnake(key) , name : key , EV_IPCType :"text", value :"" });
-        });
+		});
         var mainObjObj = EV_IPCList.getScopeWindow().mainObj;
         mainObjObj.$w.EV_IPC.create({ "id"      : id
-                                  , "type"    : "EV_IPCMap"
-                                , "option"  : {"baseNode" :"map"}
-                                , "keyInfo" : colInfo     }); 
-        
+                                    , "type"    : "EV_IPCMap"
+                                    , "option"  : {"baseNode" :"map"}
+                                    , "keyInfo" : colInfo     });  
     }
     
     /**
@@ -1036,14 +1032,14 @@
      * */
     // 서식데이터
     urzzFunction.sersic = {
-     "**1188":[{"name":"집주인0","id":"OWNER0"}],
+      "**1188":[{"name":"집주인0","id":"OWNER0"}],
       "**1246":[{"name":"서비스신청여부","id":"SERVICE_1"}], 
-     "**3135":[ ],
+      "**3135":[ ],
       "**2018":[ ],              
-     "**3159":[ ],
-     "**9054":[ ],
-     "**9143":[ ],
-     "**1382":[{name :'****', id : 'DATA_NAME'},
+      "**3159":[ ],
+      "**9054":[ ],
+      "**9143":[ ],
+      "**1382":[{name :'****', id : 'DATA_NAME'},
                {name :'*****', id : 'DATA_INFO'},{name :'계좌번호', id : 'ACCOUNT'} ]
      
      };
@@ -1097,15 +1093,12 @@
                 }
             });
         });
-        
         // docParam 을 생성합니다.
         mainObjObj.$w.EV_IPC.create({ "id"      : "docParam"
-                                      , "type"    : "EV_IPCMap"
+                                    , "type"    : "EV_IPCMap"
                                     , "option"  : {"baseNode" :"map"}
-                                    , "keyInfo" : colInfo     }); 
-
+                                    , "keyInfo" : colInfo     });
         mainObjObj.$w.getComponentById("docParam").setJSON({});
-     
         return colInfo;
     } 
     
@@ -1124,7 +1117,7 @@
                 , {pname :"val2"             , utilNm : []   , "fnGetData" : function(param){return "2"}}
             ]; 
         /* 현재 설정되어진 전송문자 항목을 지정합니다.*/
-         urzzFunction.fxdSetDataFnJSON   = {
+		urzzFunction.fxdSetDataFnJSON   = {
                      "**2017" : urzzFunction.fnFxdf__2017
                    , "**2094" : urzzFunction.fnFxdf__2094
                    , "**2095" : urzzFunction.fnFxdf__2095
@@ -1138,42 +1131,42 @@
                    , "**1382" : urzzFunction.fnFxdf__1382
                    , "**1246" : urzzFunction.fnFxdf__1246
                    , "**2018" : urzzFunction.fnFxdf__2018
-                 } 
+		} 
         // 매칭할 파라메터 설정
         var param =  Object.assign(paramData, urzObjInfo.getBizCustInfo()); 
         Object.assign(param, urzObjInfo.getUserInfo())
-         // YY, MM, DD 에 쓸 포멧을 설정합니다.
+        // YY, MM, DD 에 쓸 포멧을 설정합니다.
         var dateForMat = "yyMMdd";
         // 위 포멧기준 날짜 날짜호출
          
-        // 고객정보와 bizInfoe데이터를 호출하여 매칭되어지는 데이터를 입력합니다
-         var jsList = [urzObjInfo.getBizCusComInfo(), urzObjInfo.getBizCustInfo()];
-         jsList.forEach(function(jsListEach){
-             // 표시할 컬럼 정보와 비교하여 데이터를 가져와서 ColSet에 입력합니다. 데이터가 없는 데이터는 제외합니다.
-             var insetKey = Object.keys(jsListEach).filter(function(key){return Object.keys(param).indexOf(key) == -1});
-             console.log(insetKey)
-             // docParam에 데이터를 입력합니다.                                                            
-             insetKey.forEach(function(eachkey){ 
-                 param[eachkey] =jsListEach[eachkey];
-             });
-         });
+		// 고객정보와 bizInfoe데이터를 호출하여 매칭되어지는 데이터를 입력합니다
+        var jsList = [urzObjInfo.getBizCusComInfo(), urzObjInfo.getBizCustInfo()];
+        jsList.forEach(function(jsListEach){
+            // 표시할 컬럼 정보와 비교하여 데이터를 가져와서 ColSet에 입력합니다. 데이터가 없는 데이터는 제외합니다.
+            var insetKey = Object.keys(jsListEach).filter(function(key){return Object.keys(param).indexOf(key) == -1});
+            console.log(insetKey)
+            // docParam에 데이터를 입력합니다.                                                            
+            insetKey.forEach(function(eachkey){ 
+                param[eachkey] =jsListEach[eachkey];
+            });
+        });
           
         var dateTemp = WebSquare.date.getCurrentServerDate(dateForMat).match(/\d{2}/g);
         // YY, MM,DD 항목을 저장합니다. 
         dateForMat.toUpperCase().match(/[A-Z]{2}/g).forEach(function(each,idx){ 
             param[each.toLowerCase()] = dateTemp[idx] 
-         });   
+        });   
          
-         // 서식에 입력할 파라메터를 설정합니다
-         // fun 이 있을경우 함수를 실행하여 데이터를 가져올수 있도록 합니다.
-         // utilNm에서도 적용할 파라메터를 함수로 지정할수 있습니다. 
-         param.telNo = param.ddd + "-" + param.tlxcno + "-" + param.tlndno;
+        // 서식에 입력할 파라메터를 설정합니다
+        // fun 이 있을경우 함수를 실행하여 데이터를 가져올수 있도록 합니다.
+        // utilNm에서도 적용할 파라메터를 함수로 지정할수 있습니다. 
+        param.telNo = param.ddd + "-" + param.tlxcno + "-" + param.tlndno;
         param.mpNo =  param.mpidno + "-" + param.mpexno + "-" + param.mpndno;
         param.offiTelNo = param.offiDdd + "-" + param.offiTlxcno + "-" + param.offiTlndno; 
          
-         // 함수항목을 가져옵니다.
-         var returnLst = urzzFunction.getFxdfColInfoDefault(fxdLst); 
-         // 데이터 확인용 제이슨
+        // 함수항목을 가져옵니다.
+        var returnLst = urzzFunction.getFxdfColInfoDefault(fxdLst); 
+        // 데이터 확인용 제이슨
         var exposerFxdfJs = {};
         // 데이터를 설정할 정보를 초기화 합니다.
         var dataUtil = urzzFunction.dataUtil;
@@ -1219,17 +1212,16 @@
              "HGHAGE_FLR_APIR_LEME_SV_APL_YN" : "val1"
             ,"AGN_HW_NM"                      : "hepPrsnNm"
             ,"AGN_HW_SIGN"                    : "hepPrsnSign"  
-        }
+        };
         var guestAgAtgr = "WHO_AG_ATGR_MENT_"
         var guestVdAtgr = "WHO_WEA_ATGR_MENT_"
         for(var i = 1 ; i <= 7; i++){
             colInfoCommon[guestAgAtgr + i] =  guestAgAtgr + i;
-            if(i <=2){ 
+            if(i <= 2){ 
                 colInfoCommon[guestVdAtgr + i] =  guestVdAtgr + i; 
             }
         }
-
-         return urzzFunction.fnFxdfRtnSetter(param,dataUtilLst, colInfoCommon);
+        return urzzFunction.fnFxdfRtnSetter(param,dataUtilLst, colInfoCommon);
     }
     /**
         2023-08-05
@@ -1237,8 +1229,7 @@
         위험가중자산 산출전 부도욜 확인서 [**2084] 의 항목입력  
     */     
     urzzFunction.fnFxdf__2084 = function(param , dataUtilLst){
-         var colInfoCommon = { 
-            // "POS_FNM_NM_1"     : "mmaPsitCdnm"  판매직원성명 암호화데이터가 아니어서 오류 발생   
+         var colInfoCommon = {  
              "UDSD_YN"                  : "udsdYn1"
             ,"CNSL_POS_PSIT"            : "mmaPsitCdnm"  
             ,"MNGM_RPPR_STBT_OPNN_YN"   : "val1"
@@ -1297,8 +1288,7 @@
         }  
         colInfoCommon.UND_GD_NM_5  = "val1"
         // 99 이상일경우 
-        if(param.arage >= 99){  
- 
+        if(param.arage >= 99){   
             colInfoCommon.VAL_NM_3 = "nameOfgame" 
             colInfoCommon.VAL_SIGN_3 = "yesiam"
             param.val0 = "0";
@@ -1309,14 +1299,12 @@
             }
             
             // 참여자 여부가 정상일경우
-            if(param.wwpovaccLemeSvYn == "1"){  
- 
+            if(param.wwpovaccLemeSvYn == "1"){   
                 colInfoCommon.DD_3 = "dd" 
                 param.ovaccRelSignF =  param.w___elSign;
                 param.ovaccRelNmF =  param.w____rRelNm;
                 param.ovaccTelNoF =  urzzFunction.fnDateSetter("ddd-dddd-dddd",param.wwpa__o).replaceAll("undefined", ""); 
-                param.ovaccRelNmF = param.wwpovaccRelNm; 
-                
+                param.ovaccRelNmF = param.wwpovaccRelNm;  
             }
         } 
         // 전송문자 파라메터를 설정후 반환합니다.
@@ -1331,16 +1319,15 @@
     urzzFunction.fnFxdf__2018 = function(param , dataUtilLst){
         var colInfoCommon = { 
               "UTI_BVB_DSB_ACNO" : "co***noF"
-             ,"RPL_DEPS_AMT"       : "ap****F"
+             ,"RPL_DEPS_AMT"     : "ap****F"
              ,"UTI_BVB_DSB_AMT"  : "apl***F"
             
         }
         // 계좌번호에 하이폰을 입력합니다.
         param.connAcnoF = urzObjInfo.transAcno(param.connAcno);
         // 금액
-        param.aplAmtF = param.buygAmt.toLocaleString(); 
-    
-         return urzzFunction.fnFxdfRtnSetter(param,dataUtilLst, colInfoCommon);
+        param.aplAmtF = param.buygAmt.toLocaleString();  
+		return urzzFunction.fnFxdfRtnSetter(param,dataUtilLst, colInfoCommon);
     }
         
     /**
