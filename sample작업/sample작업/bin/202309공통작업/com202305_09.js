@@ -81,7 +81,7 @@
              예     : urzObjInfo.getBizInfo("resultDataList01", "FND00Map", mainObj.$w); 
              
          
-         3) 라디오 버튼 항목설정
+         3) 라디오 버튼 항목설정 
          - urzzFunction.fnRdBtnSetter(P1 json {value:label}  
                                   ,P2 object (xf:select1, renderType="radiogroup")
                                   ,P3 boolean OrderBy(true:asc, false:desc)
