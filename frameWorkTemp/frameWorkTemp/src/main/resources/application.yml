@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: system
+    url: jdbc:oracle:thin:@localhost:1521/XE
+    password: oracle
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+          
+mybatis:
+  mapper-locations: 'mapper/**/*.xml'
+
