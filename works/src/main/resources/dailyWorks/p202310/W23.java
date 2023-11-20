@@ -21,9 +21,12 @@ public class W23 {
 	public void fileSearch(String fileName) {
 		try(Stream<File> fileStram = Arrays.stream(new File(fileName).listFiles())){
 			Map<Boolean, List<File>> fMap = fileStram.collect(Collectors.groupingBy(f->f.isFile()));
-			fMap.get(true).forEach(System.out::println);
+			fMap.get(true).stream().filter(eachF->eachF != null && eachF.toString().contains("proper")).forEach(System.out::println);
 			fMap.get(false).forEach(f->{
-				fileSearch(f.toString());
+				try {
+					fileSearch(f.toString());
+				}catch(Exception e) {}
+				
 			});
 		}
 	}
@@ -56,7 +59,6 @@ public class W23 {
 	}
 
 	public static void main(String[] args) {
-		//new W23().fileSearch("c:\\");
-		new W23().callFile();
+		new W23().fileSearch("C:\\SOURCE_f\\busan"); 
 	}
 }

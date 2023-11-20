@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<script>
+	// 치타상 웹 데이터 뽑을떄 쓰는 로직
+	var arr = $("#chita").children();
+	var length = arr.length;
+	var nowData = "";
+	for(var i = 0 ; i <length ; i++){
+		var eleInnf = $($(arr[i]).children().children());
+		for(var v = 0 ; v < eleInnf.length; v++){
+			var e1 = $( eleInnf[v]).children()[0];
+			var e2 = $(e1).children()[0]
+			var ttt= $(e2).text();
+			if(ttt == ""){
+				var val2 = $(e1) ; 
+				nowData += $(val2[0]).text().replace(",","").replace(/\s*/g, '').replace(" ","").trim() +",";
+				 
+			}else{
+				nowData +=$(e2).text().replace(",","").trim()+","
+			}
+			
+		} 
+		nowData += "\n"
+	}
+	console.log(nowData); 
+	
+	
+	var arr = $("#chita").find("tr"); 
+	var length = arr.length;
+	var nowData = "";
+	for(var i = 0 ; i <length ; i++){
+		var nowRow = $(arr[i]).find("td");
+		var row1 = $(nowRow[1]).find("p");
+		for(var v = 0 ; v < row1.length; v ++){
+			nowData += $(row1[v]).text() +",";
+		}
+		for(var v = 2 ; v < nowRow.length; v ++){
+			var rowth = $(nowRow[v]).find("p");
+			for(var j = 0 ; j < rowth.length; j ++){
+				nowData += $(row1[j]).text() +",";
+			}
+		}
+		nowData+="\n"
+	}
+	
+	
+	//-------
+
+
+	var arr = $("#chita").find("tr"); 
+	var length = arr.length;
+	var nowData = "";
+	for(var i = 0 ; i <length ; i++){
+		var nowRow = $(arr[i]).find("td");
+	 
+		for(var v = 1 ; v < nowRow.length; v ++){
+			var rowth = $(nowRow[v]).find("p");
+			for(var j = 0 ; j < rowth.length; j ++){
+				nowData += $(rowth[j]).text().replace(",","").trim() +",";
+			}
+		}
+		nowData+="\n"
+	}
+	console.log(nowData);
+		
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

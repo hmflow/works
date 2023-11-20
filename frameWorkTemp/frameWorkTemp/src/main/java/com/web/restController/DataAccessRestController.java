@@ -20,8 +20,7 @@ public class DataAccessRestController{
 	@PostMapping("/calldata")
 	public Object callEvent(@RequestParam String sqlId
 			             , @RequestParam String sqlCommand
-			             , @RequestParam Map sqlparam ) {
-		
+			             , @RequestParam Map sqlparam ) { 
 		Object returnObject = null; 
 		if(sqlCommand.equals("listMap")) { 
 			returnObject = dbConnService.getMapList(sqlId, sqlparam);
