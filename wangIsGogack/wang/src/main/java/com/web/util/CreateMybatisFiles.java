@@ -24,7 +24,7 @@ import com.web.service.DbConnecterService;
  
 
 /**
- * 2023-11-22 이상근 (OU14480) 
+ * 2023-11-22 JAVAWANG 
  * 
  *데이터베이스에 저장되어진 엑셀파일을 마이바티스XML과 Mapper을 생성합니다.
  */
@@ -35,7 +35,7 @@ public class CreateMybatisFiles {
 	private DbConnecterService dbConnService;
 	
 	/**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 JAVAWANG 
      * 생성되어진 매퍼클래스파일과 매퍼가 저장되어질 경로를 지정합니다.
      */
 	//생성되어질 클래스파일
@@ -63,7 +63,7 @@ public class CreateMybatisFiles {
 								+"%s"
 							    +"\t</%s>\n";
 	/**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      *  
      * (Controller) 데이터 베이스에 적용되어진 쿼리정보를 기준으로 바이바티스 소스파일을 생성합니다.
      * @param  Map - 파라메터를 받습니다.
@@ -78,7 +78,7 @@ public class CreateMybatisFiles {
 	}
 	
     /**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      *  
      *    카테고리2개와 페이지명을 받아 반환합니다.
      * @param  List<Map> category1 - 패키지 내의 소스파일을생성합니다. 
@@ -143,7 +143,7 @@ public class CreateMybatisFiles {
 	}
 	
     /**
-     * 2023-11-23 이상근 (OU14480) 
+     * 2023-11-23 JAVAWANG 
      *  
      * 파일을생성합니다
      * @param  filePath filePath - 생성할 파일경로
@@ -165,7 +165,7 @@ public class CreateMybatisFiles {
 	}
 	
     /**
-     * 2023-11-23 이상근 (OU14480) 
+     * 2023-11-23 JAVAWANG 
      *  
      * 매퍼가 생성되어지기 전에 파일을 정리합니다.
      * @return  
@@ -185,7 +185,7 @@ public class CreateMybatisFiles {
 		});
 	}
     /**
-     * 2023-11-23 이상근 (OU14480) 
+     * 2023-11-23 JAVAWANG 
      *  
      * 매퍼와 XML파일을 삭제하기위해 경로와 파일을 가져옵니다.
      * @return  

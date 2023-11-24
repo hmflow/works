@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 2023-11-21 이상근 (OU14480) 
+ * 2023-11-21 JAVAWANG 
  * 
  * 수정된 클래스파일을 톰캣서버에 반영을 합니다.
  */
@@ -45,7 +45,7 @@ public class ClassUpdate {
 			               + "modified time\t   : %s \n"
 			               + "-------------------  -----------------------------------";
     /**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      * 변경된 클레스를 찾아서 업데이트를 실행합니다.
      *  
      * @return  
@@ -71,7 +71,7 @@ public class ClassUpdate {
 		fileCopy();
 	}
     /**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      * 변경된 클레스를 찾아서 업데이트를 실행합니다.
      * %% 전역변수를 두지않고 바뀐값만 리턴받을수 있게 수정
      * @return  
@@ -97,7 +97,7 @@ public class ClassUpdate {
 	
 	
     /**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      * 
      * 
      * @return  
@@ -115,7 +115,7 @@ public class ClassUpdate {
 		}
 	}
     /**
-     * 2023-11-22 이상근 (OU14480) 
+     * 2023-11-22 JAVAWANG 
      * 파일카피를 시전합니다
      * %% 전역변수를 삭제하고 파라메터를 넘길수 있도록 합니다.
      * @param  Map sqlparam  - 파라메터를 받습니다.

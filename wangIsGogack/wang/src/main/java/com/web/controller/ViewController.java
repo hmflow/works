@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 /**
- * 2023-11-20 이상근 (OU14480) 
+ * 2023-11-20 JAVAWANG 
  * 
  * ViewController 에서 페이지이동을 관리합니다.   
  * 함수 viewController를 override 하여 구현하였고 카테고리2개 까지 만들었습니다.
@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewController { 
 	private static final Logger logger = LoggerFactory.getLogger(ViewController.class);
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 JAVAWANG 
      * 페이지를 호출합니다.   
      * @param  String page  - 페이지명
      * @return ModelAndView - 페이지와 파라메터를 담아서 리턴합니다.
@@ -51,7 +51,7 @@ public class ViewController {
     }	 
  
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 JAVAWANG 
      * 
      * (Override) 페이지를 호출합니다. 
      *    카테고리1개와 페이지명을 받아 반환합니다.
@@ -67,7 +67,7 @@ public class ViewController {
 		return getModelAndViewPageDirection(category1 + "/"  + page); 
     } 
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 JAVAWANG 
      * 
      * (Override) 페이지를 호출합니다. 
      *    카테고리2개와 페이지명을 받아 반환합니다.
@@ -86,7 +86,7 @@ public class ViewController {
     } 
     
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 JAVAWANG 
      * 
      * ModelAndView 를 통합하여 관리를 합니다.
      * @param String page - 이동할 페이지 위치

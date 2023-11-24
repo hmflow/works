@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.google.common.base.CaseFormat;
 
 /**
- * 2023-11-22 이상근 (OU14480) 
+ * 2023-11-22 JAVAWANG 
  * 
  *  데이터 베이스로 받은 컬럼값을 카멜형식으로 변환해서 반환할수 있도록 합니다
  */
