@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.web.mapper")
 public class StartWeb {
 	public static void main(String[] args) {
+		
 		SpringApplication.run(StartWeb.class, args);
 	}
 }
