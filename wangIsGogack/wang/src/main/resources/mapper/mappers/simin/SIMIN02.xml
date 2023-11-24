@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'  '../../../dtd/mybatis-3-mapper.dtd'>
+<!--CreateMybatisFile 클래스로 부터 생성되어진 파일입니다. --> 
+<mapper namespace='com.web.mapperImplss.mappers.SiminMapper'> 
+	<update id='updateSimin' parameterType='DataSet' > 
+		/*simin*/select #{data} data from dual union ALL select #{data} data from dual 
+	</update>
+
+</mapper> 
