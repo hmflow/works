@@ -24,7 +24,7 @@ public class UserInfo {
 	@Column(name="id", length=50)
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private String id;
-	
+	 
 	@Convert(converter = PasswordConverter.class)
 	@Column(name="pass", length=250) 
 	private String pass;
