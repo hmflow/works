@@ -16,7 +16,7 @@ public class DataAccessRestController{
 	@Autowired
 	private DbConnecterService dbConnService;
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20
      * 데이터를 호출합니다.   
      * @param  Map sqlparam  - 파라메터를 받습니다.
      * @return ModelAndView - 페이지와 파라메터를 담아서 리턴합니다.
@@ -28,7 +28,7 @@ public class DataAccessRestController{
 		return mov;
 	}
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 
      * sql을 호출합니다.
      * @param  Map sqlparam  - 파라메터를 받습니다.
      * @return ModelAndView - 페이지와 파라메터를 담아서 리턴합니다.
@@ -42,7 +42,7 @@ public class DataAccessRestController{
 		return mov;
 	}
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20 
      * 마이바티스 쿼리를 파라메터를 입력후 반환합니다.
      * 
      * %% 파라메터가 다 없을경우 예외처리를 하지않았습니다.
@@ -62,7 +62,7 @@ public class DataAccessRestController{
 		return qryData;
 	}
     /**
-     * 2023-11-20 이상근 (OU14480) 
+     * 2023-11-20  
      * 서비스 호출 관리합니다.
      * @param  Map sqlparam  - 파라메터를 받습니다.
      * @return ModelAndView - 페이지와 파라메터를 담아서 리턴합니다.
