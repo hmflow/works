@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "../../dtd/mybatis-3-mapper.dtd">
+        
+
+<mapper namespace="com.web.mapperImplss.util.UtilMapper">
+	<select id="selectQueryCheck"  parameterType="DataSet"  resultType="DataSet">
+		${sql}
+	</select>
+	
+	<update id="updateQueryCheck"  parameterType="DataSet">
+		${sql}
+	</update>
+	
+	<select id="findQuery" parameterType="DataSet" resultType="DataSet">
+		/**/
+		SELECT SQL_ID 
+		     , SQL 
+		  FROM TB_SQL
+		 WHERE SQL_ID = #{sqlId} 
+		   AND MAPPER = #{mapper}
+	</select>
+	
+	<select id="findMapper" parameterType="DataSet" resultType="DataSet">
+		/* 데이터베이스에 저장되어진 매핑정보를 모두 호출합니다. */
+		SELECT SQL_ID
+		     , SQL_COMMAND
+		     , SQL
+		     , NVL(SQL_VER,1)             AS SQL_VER
+		     , NVL(PARAM_TYPE,'DataSet')  AS PARAM_TYPE
+		     , NVL(RET_TYPE,'DataSet')    AS RET_TYPE
+		     , USE_YN 
+		     , SQL_TYPE
+		     , MAPPER 
+		  FROM TB_SQL
+		 WHERE USE_YN = #{useYn} 
+	</select>
+ 
+	
+</mapper>

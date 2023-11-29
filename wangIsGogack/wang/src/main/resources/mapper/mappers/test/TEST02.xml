@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'  '../../../dtd/mybatis-3-mapper.dtd'>
+<!--CreateMybatisFile 클래스로 부터 생성되어진 파일입니다. -->
+<mapper namespace='com.web.mapperImplss.mappers.TestMapper'>
+	<insert id='insertTest01' parameterType='DataSet' > 
+		/*insert*/ insert into TB_TEST ( VALUE1,VALUE2, VALUE3 ) values (#{value1},#{value2},#{value3})
+	</insert> 
+</mapper> 
