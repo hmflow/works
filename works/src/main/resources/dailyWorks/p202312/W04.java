@@ -1,5 +1,9 @@
 package dailyWorks.p202312;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,37 +16,26 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
  
 
-public class W04 { 
-	/**
-	   
-	 */
-	
+public class W04 {  
 	/** 1 with
 	 *  2 subquery
 	 *  
 	*/
-	String qryStr = "    SELECT A.DATA1 AS TEST , B.DATA2 \n"
-			+ ", B.DATA2 , B.DATA2 FROM TABLE_1 A\r\n"
-			+ "                             INNER JOIN (SELECT C DATAINN AS C FROM TB_AAA A) B\r\n"
-			+ "                         ON A.DATA = B.DATA \r\n"
-			+ "                             LEFT OUTER JOIN (SELECT BBB AS C FROM TB_AAA A) C\r\n"
-			+ "                         ON A.DATA = C.DATA \r\n"
-			+ "                  WHERE      A.DATA = '202212'   AND A.DATA = '202212' OR A.DATA = '202212'"
-			+ "      OVER BY A.DDD DESC";
+ 
 	private List<String> spData = null;
 	private List<String> jumpData = null;
-	private int defaultBlnkDefault = 7;
+	private int defaultBlnkDefault = 10;
 	public W04() {
-		spData = Arrays.asList ("INNER JOIN","LEFT OUTER JOIN","JOIN", ",","ON","WHERE","FROM", "AND", "OR","OVER BY");
-		jumpData = Arrays.asList ("OVER BY");
+		spData = Arrays.asList ("INNER JOIN","LEFT OUTER JOIN","JOIN", ",","ON","WHERE","FROM", "AND","ORDER BY","GROUP BY", "OR");
+		jumpData = Arrays.asList ("ORDER BY","GROUP BY");
 	}
 	
 	public void queryChange() throws Exception{
-		/*
+		
 		Clipboard cp = Toolkit.getDefaultToolkit().getSystemClipboard();
-		String query  = (String) cp.getData(DataFlavor.stringFlavor);
-		System.err.println(query);
-		*/
+		String qryStr  = (String) cp.getData(DataFlavor.stringFlavor);
+		System.err.println(qryStr);
+		
 		Map<String, String> qryData = new HashMap<String,String>();
 		String qry = qryStr.toUpperCase().replaceAll("\n", " ").replaceAll("\r", " ").replaceAll("\t"," "); 
 		Pattern pattern = Pattern.compile("\\(([^)]*SELECT[^)]*)\\)");
@@ -60,30 +53,71 @@ public class W04 {
 		for(String key : qryData.keySet()) {
 			List<String> strList = Arrays.stream(qry.split("\n")).filter(f-> f.indexOf(key) != -1).collect(Collectors.toList());
 			String nowStr = strList.get(0);
-			int nowLength = nowStr.split("\\(")[0].length();
-			System.err.println(nowStr);
-			qry= qry.replace(key,"\n"+ changeQry(qryData.get(key), nowLength + defaultBlnkDefault ));
+			int nowLength = nowStr.split("\\(")[0].length(); 
+			String[] splitStr = changeQry(qryData.get(key) , 7 ).split("\n");
+			String resultStr = "";
+			for(int i = 0 ; i < splitStr.length; i++) {
+				resultStr += (i > 0 ?   String.format("%"+(nowLength+1)+"s", "") : "")+splitStr[i] +"\n";
+			}
+			resultStr += String.format("%"+(nowLength)+"s", "");
+			qry= qry.replace(key, resultStr  ) ;
 			
 		}
-		
-		System.err.println(qry);
-			
+		System.err.println(qry); 
+		cp.setContents(new StringSelection(qry), null);
 	}
 	
-	private String changeQry(String qry ,int defaultBlnk ) {
+	private String toCaseQryChange(String qry ,int  stpos) {  
+		Pattern pattern = Pattern.compile("CASE(.*?)END(?!.*END)"); 
+		Matcher matcher  = pattern.matcher(qry); 
+		
+		if(matcher.find()) {
+			String result = matcher.group(1);  
+			int scoposInn = stpos+4;
+			
+			String changeVal = toCaseQryChange(result, stpos);
+			
+			String splitBlnk =   String.format("%"+scoposInn+"s","")  ;
+			for(String strEach : Arrays.asList( " WHEN ", " THEN ", " ELSE ", " END ")) {
+				changeVal =   changeVal.replaceAll(strEach,splitBlnk + strEach );
+			} 
+			
+			qry = qry.replace(result, changeVal);
+			System.err.println(qry);
+		}
+		return qry;
+	}
+	
+	private String changeQry(String qry ,int defaultBlnk  ) {
 
 		while(qry.contains("  ")) {
 			qry = qry.replaceAll("  ", " ");
 		} 
 		String selectStr = qry.split("FROM")[0];
-		selectStr = selectStr.trim().replaceAll("^SELECT", "");
+		//selectStr = selectStr.trim().replaceAll("^SELECT", "");
+		String qryHeader = selectStr.split("SELECT")[0] ;
+		selectStr = selectStr.split("SELECT")[1];
 		String resultSelect = "";
 		Set<String>  taNm = new HashSet<String>();  
-		List<String> spData = Arrays.asList ("INNER JOIN","LEFT OUTER JOIN","JOIN", ",","ON","WHERE","FROM", "AND", "OR","OVER BY");
 		
 		for(String param : selectStr.split(",")) {
 			taNm.add(param.contains(".")? String.format(" %s " , param.split("\\.")[0].trim()) : "&&&");
-			resultSelect += (resultSelect.equals("") ? setBlank("SELECT",defaultBlnk): setBlank(",",defaultBlnk)) + param.trim() +"\n"  ;
+			boolean isVaInn = resultSelect.equals("");
+			String varInn =  isVaInn ? "SELECT" : ",";
+			
+			String createRow =  justBlank(varInn, defaultBlnk) + param.trim() +"\n"  ;
+			if(createRow.contains("CASE")) { 
+				String rsCase = toCaseQryChange(createRow, 11).replaceAll("\\bCASE\\s+WHEN\\b", "CASE WHEN").replaceAll(" ", "ㅋ");
+				
+				for(int i = 100; i>=1; i--) {
+					String replaceVal = "ㅋ".repeat(i);
+					rsCase = rsCase.replaceAll(replaceVal, (i!=1 ? "\n": "")+replaceVal.replaceAll("ㅋ", " "));
+					
+				}
+				System.err.println(rsCase);
+				createRow = rsCase;
+			}
+			resultSelect += createRow;
 		}
 		
 		String fromStr = "FROM" + qry.split("FROM")[1]; 
@@ -108,30 +142,33 @@ public class W04 {
 		
 		for(String fromEach : fromStrLst.stream().filter(each->!"".equals(each)).toList()) { 
 			boolean isContain = spData.stream().filter(each -> fromEach.indexOf(each) != -1).count() > 0;
-			fromRsStr +=  ( isContain ? setBlank(fromEach,defaultBlnk ) : fromEach.trim() +"\n")   ;
-		}
+			fromRsStr +=  ( isContain ? setBlank(fromEach,defaultBlnk )  : fromEach.trim() +"\n")   ;
+		} 
 		
-		
-		
-		return resultSelect+ fromRsStr;
+		return justBlank(qryHeader, defaultBlnkDefault) +"\n"+ resultSelect+ fromRsStr;
 	}
 	
 	private String setBlank(String str , int length) {
 		String returnTemp = "";
 		if(jumpData.contains(str)) {
-			returnTemp = String.format("%"+length+"s", str) +" "; ;
+			returnTemp =justBlank(str , length);
 		}else {
 			String[] spDataBlnk = str.split(" ");
-			returnTemp = String.format("%"+length+"s", spDataBlnk[0]) +" "; 
+			returnTemp = justBlank(spDataBlnk[0] , length) ;  
 			for(int i = 1 ; i<spDataBlnk.length; i++) {
 				returnTemp += spDataBlnk[i].trim() +" ";
 			}
-		}
-		
+		} 
 		return returnTemp;
 	}
 	
-	public static void main(String[] args) {
+	private String justBlank(String str , int length) { 
+		String returnTemp = "";
+		returnTemp = String.format("%"+length+"s", str ) +" ";   
+		return returnTemp;
+	}
+	
+	public static void main(String[] args) { 
 		try {
 			new W04().queryChange();
 		}catch(Exception e){
